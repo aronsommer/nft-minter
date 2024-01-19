@@ -1,0 +1,126 @@
+@keyframes gradient {
+
+    0%,
+    to {
+        background-position: 0 50%
+    }
+
+    50% {
+        background-position: 100% 50%
+    }
+}
+
+* {
+    color: rgba(4, 30, 73, .7);
+    font-family: "Source Sans 3", Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    -webkit-font-smoothing: antialiased;
+    font-weight: 400;
+    letter-spacing: .05rem;
+    line-height: 1rem;
+    margin: 0;
+    padding: 0;
+    text-rendering: optimizeLegibility;
+    word-break: break-word;
+}
+
+body,
+html {
+    height: 100%;
+}
+
+#bg {
+    animation: gradient 10s ease infinite;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-position: top center;
+    background-size: 200% 200%;
+    height: 100%;
+    position: fixed;
+    width: 100%;
+}
+
+#container {
+    position: absolute;
+    top: 10px;
+    width: 100%;
+}
+
+#log {
+    color: red;
+    font-size: 1rem;
+    font-weight: 300;
+    mix-blend-mode: normal;
+}
+
+input[type=number],
+input[type=password],
+input[type=text] {
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    background-color: rgba(255, 255, 255, .1);
+    border: 0;
+    border-radius: 6px;
+}
+
+input[type=file]::file-selector-button {
+    color: rgba(4, 30, 73, .7);
+}
+
+input[type=text] {
+    margin-top: 10px;
+}
+
+table {
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    background-color: rgba(255, 255, 255, .4);
+    border-collapse: collapse;
+    border-radius: 6px;
+    margin: 0 auto;
+    width: 600px;
+}
+
+tr td {
+    display: block;
+    padding: 10px 20px;
+}
+
+td {
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+}
+
+td:empty {
+    display: none;
+}
+
+#network-table {
+    visibility: visible;
+}
+
+#login-table,
+#main-table {
+    visibility: hidden;
+}
+
+input[type=button],
+input[type=file] {
+    display: none;
+}
+
+.custom-input-button {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background-color: #fff;
+    border: 0;
+    border-radius: 6px;
+    color: #000;
+    cursor: pointer;
+    padding: 0 5px;
+}
+
+a,
+a:active,
+a:hover,
+a:visited {
+    color: #2f81f7;
+}

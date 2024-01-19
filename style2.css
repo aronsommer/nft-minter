@@ -1,0 +1,230 @@
+@keyframes gradient {
+
+    0%,
+    to {
+        background-position: 0 50%
+    }
+
+    50% {
+        background-position: 100% 50%
+    }
+}
+
+* {
+    font-family: "Source Sans 3", Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    -webkit-font-smoothing: antialiased;
+    font-weight: 400;
+    letter-spacing: .05rem;
+    line-height: 1rem;
+    margin: 0;
+    padding: 0;
+    /* Remove blue highlight of button on mobile */
+    -webkit-tap-highlight-color: transparent;
+    text-rendering: optimizeLegibility;
+    word-break: break-word;
+}
+
+body,
+html {
+    height: 100%;
+}
+
+body {
+    /* To stop scrolling on mobile at start */
+    /* Will be changed to auto in database.js setUpView() */
+    overflow-y: hidden;
+}
+
+#bg {
+    animation: gradient 10s ease infinite;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-position: top center;
+    background-size: 200% 200%;
+    height: 100%;
+    position: fixed;
+    width: 100%;
+}
+
+#container {
+    position: absolute;
+    top: 10px;
+    width: 100%;
+}
+
+#title-table {
+    background-color: transparent;
+    mix-blend-mode: normal;
+}
+
+#title-table td {
+    color: black;
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 2rem;
+    margin: 0;
+    padding-right: 0;
+    padding-top: 10px;
+    text-align: right;
+}
+
+#network-table {
+    visibility: visible;
+}
+
+#login-table,
+#main-table {
+    visibility: hidden;
+}
+
+table {
+    background-color: black;
+    border-radius: 6px;
+    /* mix-blend-mode: darken; */
+    border-radius: 6px;
+    color: white;
+    margin: 0 auto;
+    width: 600px;
+}
+
+tr td {
+    display: block;
+    line-height: 0.8rem;
+    padding: 10px 20px;
+}
+
+td:empty {
+    display: none;
+}
+
+.table-cell-nft-type-html {
+    display: none;
+}
+
+#log {
+    color: red;
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+input[type=button],
+input[type=file] {
+    display: none;
+}
+
+input[type=number],
+input[type=password],
+input[type=text] {
+    border: 0;
+}
+
+input[type=text] {
+    margin-top: 10px;
+}
+
+.custom-input-button,
+.radio-nft-type {
+    align-items: center;
+    background-color: #696969;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    display: inline-flex;
+    min-height: 20px;
+    /* min-width: 175px; */
+    padding: 3px 5px;
+}
+
+.radio-nft-type {
+    accent-color: black;
+}
+
+input:focus {
+    outline: none;
+}
+
+input[type=file]::file-selector-button,
+input[type=number],
+input[type=password],
+input[type=text] {
+    background-color: white;
+    border-radius: 6px;
+}
+
+input[type=password],
+input[type=text] {
+    padding-left: 5px;
+}
+
+input[type=file]::file-selector-button {
+    padding: 2px 5px;
+}
+
+a,
+a:active,
+a:hover,
+a:visited {
+    color: #2f81f7;
+}
+
+hr {
+    animation: hr-animation1 0.75s infinite;
+    animation-play-state: paused;
+    background: linear-gradient(to left, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    border: none;
+    height: 1px;
+}
+
+@keyframes hr-animation1 {
+    0% {
+        background: linear-gradient(to right, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    }
+
+    25% {
+        background: linear-gradient(to right, #23d5ab, #ee7752, #e73c7e, #23a6d5);
+    }
+
+    50% {
+        background: linear-gradient(to right, #23a6d5, #23d5ab, #ee7752, #e73c7e);
+    }
+
+    75% {
+        background: linear-gradient(to right, #e73c7e, #23a6d5, #23d5ab, #ee7752);
+    }
+
+    100% {
+        background: linear-gradient(to right, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    }
+}
+
+#open-metamask-button-table {
+    background-color: #2f81f7;
+    cursor: pointer;
+    display: none;
+}
+
+#br-after-open-metamask-button-table {
+    display: none;
+}
+
+/* Mobile style */
+@media screen and (max-width: 768px) {
+
+    #container {
+        top: 0;
+    }
+
+    table {
+        border-radius: 0;
+        width: 100%;
+    }
+
+    #open-metamask-button-table,
+    #br-after-open-metamask-button-table {
+        display: block;
+    }
+
+    tr td {
+        line-height: 1.5rem;
+        padding: 10px 10px;
+    }
+}

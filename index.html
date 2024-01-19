@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFT Minter</title>
+    <!-- <link rel="stylesheet" href="style1.css"> -->
+    <link rel="stylesheet" href="style2.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+
+    <script type="module">
+        import { startAuthenticationWithEmailAndPassword } from './database.js';
+        window.startAuth = () => {
+            startAuthenticationWithEmailAndPassword();
+        };
+        let passInput = document.getElementById("passwordInput");
+        passInput.addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                startAuthenticationWithEmailAndPassword();
+            }
+        });
+        import { mintNFT } from './ethereum.js';
+        window.mint = () => {
+            mintNFT();
+        };
+        import { NftStorageUploadImage } from './nft-storage.js';
+        window.nftsUploadImage = () => {
+            NftStorageUploadImage();
+        };
+        import { NftStorageUploadFile } from './nft-storage.js';
+        window.nftsUploadFile = () => {
+            NftStorageUploadFile();
+        };
+        import { NftStorageUploadJSON } from './nft-storage.js';
+        window.nftsUploadJSON = () => {
+            NftStorageUploadJSON();
+        };
+        window.selectNftType = (nftType) => {
+            let tableCellsNftTypeHtml = document.getElementsByClassName('table-cell-nft-type-html');
+            if (nftType == "image") {
+                document.getElementById('table-cell-nft-type-image').style.display = "block";
+                for (let i = 0; i < tableCellsNftTypeHtml.length; i++) {
+                    tableCellsNftTypeHtml.item(i).style.display = "none";
+                }
+                document.getElementById('number-description').textContent = "3. ";
+                document.getElementById('number-upload-json').textContent = "4. ";
+                document.getElementById('number-mint-nft').textContent = "5. ";
+            }
+            if (nftType == "html") {
+                document.getElementById('table-cell-nft-type-image').style.display = "none";
+                for (let i = 0; i < tableCellsNftTypeHtml.length; i++) {
+                    tableCellsNftTypeHtml.item(i).style.display = "block";
+                }
+                document.getElementById('number-description').textContent = "4. ";
+                document.getElementById('number-upload-json').textContent = "5. ";
+                document.getElementById('number-mint-nft').textContent = "6. ";
+            }
+        }
+        if (window.ethereum) {
+            document.getElementById('open-metamask-button-table').style.display = "none";
+            document.getElementById('br-after-open-metamask-button-table').style.display = "none";
+        }
+        window.openMetaMaskMobile = () => {
+            window.open("https://metamask.app.link/dapp/www.aronsommer.com/nft-minter");
+        };
+    </script>
+</head>
+
+<body>
+    <div id="bg"></div>
+    <div id="container">
+        <table id="title-table">
+            <tr>
+                <td>NFT Minter 🤓🕹️</td>
+            </tr>
+        </table>
+        <table id="open-metamask-button-table" onclick="openMetaMaskMobile()">
+            <tr>
+                <td>Tap here to open in MetaMask Mobile</td>
+            </tr>
+        </table>
+        <br id="br-after-open-metamask-button-table">
+        <table id="network-table">
+            <tr>
+                <td id="connected-network"></td>
+                <td id="wallet-account"></td>
+            </tr>
+        </table>
+        <br id="br-after-network-table">
+        <table id="login-table">
+            <tr>
+                <td>Please provide password to use this website</td>
+                <td>Password&nbsp;<input type="password" id="passwordInput" name="passwordInput" placeholder="" style="width:50%" autofocus>&nbsp;<label class="custom-input-button" style="min-width:unset;"><input type="button" value="&#160;" onclick="startAuth()">Sign in</label></td>
+                <td id="authLog"></td>
+            </tr>
+        </table>
+        <table id="main-table">
+            <tr>
+                <td>1. Select NFT type you want to mint<br><br><label class="radio-nft-type"><input type="radio" name="nftType" onclick="selectNftType(this.value)" value="image" checked>&nbsp;Image</label>&nbsp;&nbsp;<label class="radio-nft-type"><input type="radio" name="nftType" onclick="selectNftType(this.value)" value="html">&nbsp;HTML file</label><br><br>
+                    <hr>
+                </td>
+                <td id="table-cell-nft-type-image">2. Select image and upload it to NFT.Storage<br><br><label class="custom-input-button"><input type="file" id="imageInput" name="imageInput" accept="image/png, image/gif, image/jpeg">Select image</label>&nbsp;&nbsp;<label class="custom-input-button"><input type="button" value="&#160;" onclick="nftsUploadImage()">Upload image</label><br><br>
+                    <hr>
+                </td>
+                <td class="table-cell-nft-type-html">2. Select preview image and upload it to NFT.Storage<br><br><label class="custom-input-button"><input type="file" id="previewImageInput" name="previewImageInput" accept="image/png, image/gif, image/jpeg">Select image</label>&nbsp;&nbsp;<label class="custom-input-button"><input type="button" value="&#160;" onclick="nftsUploadImage()">Upload image</label><br><br>
+                    <hr>
+                </td>
+                <td class="table-cell-nft-type-html">3. Select HTML file and upload it to NFT.Storage<br><br><label class="custom-input-button"><input type="file" id="fileInput" name="fileInput" accept=".html">Select HTML</label>&nbsp;&nbsp;<label class="custom-input-button"><input type="button" value="&#160;" onclick="nftsUploadFile()">Upload HTML</label><br><br>
+                    <hr>
+                </td>
+                <td><span id="number-description">3. </span>Enter name and description for NFT<br><br>Name&nbsp;<input type="text" id="nameInput" name="nameInput" placeholder="" style="width:100%"><br><br>Description&nbsp;<input type="text" id="descriptionInput" name="descriptionInput" placeholder="" style="width:100%"><br><br>
+                    <hr>
+                </td>
+                <td><span id="number-upload-json">4. </span>Upload JSON to NFT.Storage<br><br><label class="custom-input-button"><input type="button" value="&#160;" onclick="nftsUploadJSON()">Upload JSON</label><br><br>
+                    <hr>
+                </td>
+                <td><span id="number-mint-nft">5. </span>Mint NFT<br><br>Receiver account (Leave empty to use your own)&nbsp;<input type="text" id="receiverInput" name="receiverInput" placeholder="" style="width:100%"><br><br>Optional string for data field&nbsp;<input type="text" id="dataInput" name="dataInput" placeholder="" style="width:100%"><!--<br><br>Token ID&nbsp;<input type="number" id="tokenIdInput" name="tokenIdInput"><br><br>Amount&nbsp;<input type="number" id="tokenAmountInput" name="tokenAmountInput">--><br><br><label class="custom-input-button"><input type="button" value="&#160;" onclick="mint()">Mint NFT</label></td>
+                <td id="log" style="line-height: 1.5rem;"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

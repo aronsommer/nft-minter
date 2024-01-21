@@ -30,12 +30,6 @@ html {
     height: 100%;
 }
 
-body {
-    /* To stop scrolling on mobile at start */
-    /* Will be changed to auto in database.js setUpView() */
-    overflow-y: hidden;
-}
-
 #bg {
     animation: gradient 10s ease infinite;
     background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
@@ -67,13 +61,9 @@ body {
     text-align: right;
 }
 
-#network-table {
-    visibility: visible;
-}
-
 #login-table,
 #main-table {
-    visibility: hidden;
+    display: none;
 }
 
 table {

@@ -49,7 +49,7 @@ async function getNetworkAndAccount() {
             document.getElementById("receiverInput").placeholder = account;
             // Show login table if wallet account found and in Sepolia testnet
             if (networkId == 11155111) {
-                document.getElementById('login-table').style.visibility = "visible";
+                document.getElementById('login-table').style.display = "table";
                 document.getElementById("passwordInput").focus();
             }
         } catch (e) {

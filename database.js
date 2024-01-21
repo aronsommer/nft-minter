@@ -82,6 +82,5 @@ function setUpView() {
     document.getElementById('network-table').style.display = "none";
     document.getElementById('br-after-network-table').style.display = "none";
     document.getElementById('login-table').style.display = "none";
-    document.getElementById('main-table').style.visibility = "visible";
-    document.body.style.overflowY = "auto";
+    document.getElementById('main-table').style.display = "table";
 }

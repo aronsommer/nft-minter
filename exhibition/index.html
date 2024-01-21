@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exhibition</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3&display=swap" rel="stylesheet">
+
+    <style>
+        @keyframes gradient {
+
+            0%,
+            to {
+                background-position: 0 50%
+            }
+
+            50% {
+                background-position: 100% 50%
+            }
+        }
+
+        * {
+            color: white;
+            font-family: "Source Sans 3", Helvetica, Arial, sans-serif;
+            font-size: 1.25rem;
+            -webkit-font-smoothing: antialiased;
+            font-weight: 400;
+            letter-spacing: .05rem;
+            line-height: 1.5rem;
+            margin: 0;
+            padding: 0;
+            /* Remove blue highlight of button on mobile */
+            -webkit-tap-highlight-color: transparent;
+            text-rendering: optimizeLegibility;
+        }
+
+        body {
+            background-color: gray;
+            margin: 0;
+            padding: 0;
+        }
+
+        #bg {
+            animation: gradient 10s ease infinite;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-position: top center;
+            background-size: 200% 200%;
+            height: 100%;
+            position: fixed;
+            width: 100%;
+        }
+
+        #nfts {
+            height: 100%;
+            margin: auto;
+            position: absolute;
+            text-align: center;
+            top: 20px;
+            width: 100%;
+        }
+
+        img {
+            border: 5px dotted white;
+            height: 50vw;
+            width: 50vw;
+        }
+    </style>
+
+    <script>
+        const CONTRACT_ADDRESS = "0xcf96eDB0b569e2152118e01bC2458881C4807aA9";
+        // const CONTRACT_ADDRESS = "0xE29F8038d1A3445Ab22AD1373c65eC0a6E1161a4"; // BoredApeYachtClub -SEPOLIA
+        let page = "";
+        let nfts = null;
+        getNfts();
+        async function getNfts() {
+            try {
+                const response = await fetch(`https://testnets-api.opensea.io/api/v2/chain/sepolia/contract/${CONTRACT_ADDRESS}/nfts?limit=10${page}`, {
+                    method: "GET",
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-API-KEY': ''
+                    }
+                });
+                const result = await response.json();
+                console.log("Success:", result);
+                nfts = result.nfts;
+                // If there is a next page call getNfts() with page endpoint
+                if (result.next) {
+                    console.log(result.next);
+                    page = "&next=" + result.next;
+                    getNfts();
+                }
+                appendNfts();
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        }
+        function appendNfts() {
+            for (let index = 0; index < nfts.length; index++) {
+                const nftElement = document.getElementById("nft_template").content.cloneNode(true);
+                nftElement.querySelector("h1").innerText = "#" + nfts[index].identifier + " - " + nfts[index].name;
+                nftElement.querySelector("a").href = `https://testnets.opensea.io/assets/sepolia/0xcf96edb0b569e2152118e01bc2458881c4807aa9/${nfts[index].identifier}`;
+                nftElement.querySelector("img").src = nfts[index].image_url;
+                nftElement.querySelector("img").alt = nfts[index].description;
+                document.getElementById("nfts").append(nftElement);
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="bg"></div>
+    <div id="nfts" class=""></div>
+    <template id="nft_template">
+        <section>
+            <h1 class=""></h1><br>
+            <a href="" target="_blank">
+                <img class="" src="" alt="" onload="this.style.height='auto';this.style.border='none'" onerror="">
+            </a>
+        </section><br>
+    </template>
+</body>
+
+</html>

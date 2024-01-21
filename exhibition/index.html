@@ -108,9 +108,14 @@
                 nftElement.querySelector("h1").innerText = "#" + nfts[index].identifier + " - " + nfts[index].name;
                 nftElement.querySelector("a").href = `https://testnets.opensea.io/assets/sepolia/0xcf96edb0b569e2152118e01bc2458881c4807aa9/${nfts[index].identifier}`;
                 nftElement.querySelector("img").src = nfts[index].image_url;
-                nftElement.querySelector("img").alt = nfts[index].description;
+                // nftElement.querySelector("img").alt = nfts[index].description;
                 document.getElementById("nfts").append(nftElement);
             }
+        }
+
+        function reloadImage(event) {
+            // Refresh the src attribute, which should make the browsers reload the iamge
+            event.src = event.src;
         }
     </script>
 </head>
@@ -122,7 +127,7 @@
         <section>
             <h1 class=""></h1><br>
             <a href="" target="_blank">
-                <img class="" src="" alt="" onload="this.style.height='auto';this.style.border='none'" onerror="">
+                <img class="" src="" alt="" onload="this.style.height='auto';this.style.border='none'" onerror="reloadImage(this);">
             </a>
         </section><br>
     </template>
